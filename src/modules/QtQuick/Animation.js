@@ -1,20 +1,23 @@
-registerQmlType({
-  module: 'QtQuick',
-  name: 'Animation',
-  versions: /.*/,
-  baseClass: 'QtQml.QtObject',
-  enums: {
+registerQmlType(class {
+  static module = 'QtQuick';
+  static element = 'Animation';
+  static versions = /.*/;
+  static baseClass = 'QtQml.QtObject';
+  static direct = true;
+
+  static enums = {
     Animation: {
       Infinite: -1
     }
-  },
-  properties: {
+  };
+
+  static properties = {
     alwaysRunToEnd: 'bool',
     loops: { type: 'int', initialValue: 1 },
     paused: 'bool',
     running: 'bool'
-  }
-}, class {
+  };
+
   constructor(meta) {
     callSuper(this, meta);
   }
