@@ -10,7 +10,7 @@ const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 const replace = require('gulp-replace');
 const karma = require('karma');
-const istanbul = require('gulp-istanbul');
+const istanbul = require('gulp-babel-istanbul');
 
 const qtcoreSources = [
   'src/qtcore/QMLBinding.js',
