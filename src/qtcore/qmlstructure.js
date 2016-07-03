@@ -102,13 +102,26 @@ function convertToEngine(tree) {
                     case "qmlaliasdef":
                     case "qmlmethod":
                     case "qmlsignaldef":
-                        item[name] = val;
+                        if (name.indexOf('.') !== -1) {
+                          const split = name.split('.');
+                          const last = split.pop();
+                          let curr = item;
+                          split.forEach(sub => {
+                            curr[sub] = curr[sub] || new QMLMetaPropertyGroup();
+                            curr = curr[sub];
+                          });
+                          curr[last] = val;
+                        } else {
+                          item[name] = val;
+                        }
                         break;
                     case "qmlelem":
                         item.$children.push(val);
                         break;
                     case "qmlobjdef":
                         // Create object to item
+                        // TODO: remove in 0.2
+                        console.error('Warning: encountered deprecated qmlobjdef, use qmlprop instead!');
                         item[name] = item[name] || new QMLMetaPropertyGroup();
                         item[name][statement[2]] = val;
                         break;
