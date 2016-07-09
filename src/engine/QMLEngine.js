@@ -120,7 +120,7 @@ const QMLEngine = function (element, options) {
         component.$imports = tree.$imports; // for later use
         component.$file = file; // just for debugging
 
-        this.rootObject = component.createObject(parentComponent);
+        this.rootObject = component.$createObject(parentComponent);
         component.finalizeImports(this.rootContext());
         this.$initializePropertyBindings();
 

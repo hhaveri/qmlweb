@@ -84,8 +84,6 @@ const Qt = {
         component.$file = file; // not just for debugging, but for basepath too, see above
 
         var obj = component.createObject(parent);
-        obj.parent = parent;
-        parent.childrenChanged();
 
         if (engine.operationState !== QMLOperationState.Init && engine.operationState !== QMLOperationState.Idle) {
           // We don't call those on first creation, as they will be called

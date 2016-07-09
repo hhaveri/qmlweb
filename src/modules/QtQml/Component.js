@@ -18,7 +18,7 @@ QMLComponent.getAttachedObject = function() { // static
     return this.$Component;
 }
 
-QMLComponent.prototype.createObject = function(parent, properties, componentContext) {
+QMLComponent.prototype.$createObject = function(parent, properties, componentContext) {
     var oldState = engine.operationState;
     engine.operationState = QMLOperationState.Init;
     // change base path to current component base path
@@ -38,6 +38,16 @@ QMLComponent.prototype.createObject = function(parent, properties, componentCont
     engine.$basePath = bp;
 
     engine.operationState = oldState;
+    return item;
+}
+
+QMLComponent.prototype.createObject = function(parent, properties, componentContext) {
+    var item = this.$createObject(parent, properties, componentContext);
+
+    if (item instanceof getConstructor('QtQuick', '2.0', 'Item')) {
+      item.$properties.parent.set(parent, QMLProperty.ReasonInit);
+    }
+
     return item;
 }
 

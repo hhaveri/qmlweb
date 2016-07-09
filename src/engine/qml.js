@@ -242,7 +242,7 @@ function construct(meta) {
             component = Qt.createComponent(meta.object.$class + ".qml");
 
         if (component) {
-            var item = component.createObject(meta.parent, {}, meta.context);
+            var item = component.$createObject(meta.parent, {}, meta.context);
 
             if (typeof item.dom != 'undefined')
                 item.dom.className += " " + meta.object.$class + (meta.object.id ? " " + meta.object.id : "");
@@ -261,12 +261,6 @@ function construct(meta) {
 
     // Apply properties (Bindings won't get evaluated, yet)
     applyProperties(meta.object, item, item, item.$context);
-
-    // Not checking if item inherits from Item because non-Item items may have
-    // a "parent" property (e.g. Timer).
-    if (meta.parent && item.hasOwnProperty("parent")) {
-      item.parent = meta.parent
-    }
 
     return item;
 }

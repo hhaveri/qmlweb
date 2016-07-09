@@ -84,7 +84,6 @@ registerQmlType({
         function createComponentObject(qmlComponent, parent) {
             var newComponent = qmlComponent.createObject(parent);
 
-            newComponent.parent = parent;
             qmlComponent.finalizeImports();
 
              if (engine.operationState !== QMLOperationState.Init) {

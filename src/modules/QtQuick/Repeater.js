@@ -34,7 +34,7 @@ function QMLRepeater(meta) {
         var model = self.model instanceof QMLListModel ? self.model.$model : self.model;
 
         for (var index = startIndex; index < endIndex; index++) {
-            var newItem = self.delegate.createObject();
+            var newItem = self.delegate.$createObject(self);
             createProperty('int', newItem, 'index', {initialValue: index});
             newItem.parent = self.parent;
             self.delegate.finalizeImports(); // To properly import JavaScript in the context of a component
